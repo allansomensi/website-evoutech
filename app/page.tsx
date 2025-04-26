@@ -1,9 +1,9 @@
+import { TheHeader } from "@/components/layout/TheHeader";
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <h1 className="text-3xl font-bold text-gray-700">
-        🚧 Em desenvolvimento!
-      </h1>
+    <div className="flex min-h-screen flex-col bg-gray-50">
+      <TheHeader />
     </div>
   );
 }
