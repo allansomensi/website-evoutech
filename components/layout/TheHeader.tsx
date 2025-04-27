@@ -24,7 +24,7 @@ export function TheHeader() {
       </div>
 
       {/* Links */}
-      <nav className="hidden space-x-10 text-base font-medium text-gray-700 md:flex">
+      <nav className="hidden space-x-10 font-medium text-gray-700 md:flex">
         <NavLink href="#inicio">Início</NavLink>
         <NavLink href="#aplicacoes">Aplicações</NavLink>
         <NavLink href="#maquinas">Máquinas</NavLink>
