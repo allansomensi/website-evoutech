@@ -3,24 +3,24 @@ import { Button } from "../ui/Button";
 
 const products = [
   {
-    title: "Máquina 1",
-    subtitle: "Descrição",
-    image: "#",
+    title: "Produção de Biscoitos",
+    subtitle: "Máquinas para produção de biscoitos.",
+    image: "img/products/biscoitos.png",
   },
   {
-    title: "Máquina 2",
-    subtitle: "Descrição",
-    image: "#",
+    title: "Embaladora de Doces",
+    subtitle: "Máquinas para embalamento de doces.",
+    image: "img/products/doces.png",
   },
   {
-    title: "Máquina 3",
-    subtitle: "Descrição",
-    image: "#",
+    title: "Produção de Massas",
+    subtitle: "Máquinas para produção de massas.",
+    image: "img/products/massas.png",
   },
   {
-    title: "Máquina 4",
-    subtitle: "Descrição",
-    image: "#",
+    title: "Embaladora de Peças",
+    subtitle: "Máquinas para embalamento de peças diversas.",
+    image: "img/products/pecas.png",
   },
 ];
 
@@ -39,7 +39,7 @@ export function Applications() {
                   alt={product.title}
                   width={160}
                   height={160}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                   unoptimized
                 />
               </div>

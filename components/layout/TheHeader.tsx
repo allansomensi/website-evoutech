@@ -19,14 +19,16 @@ export function TheHeader() {
           />
         </div>
         <div className="relative flex flex-col items-center">
-          <Image
-            src="/svg/brand.svg"
-            alt="Evoutech"
-            width={0}
-            height={0}
-            style={{ height: "auto", width: "200px" }}
-            unoptimized
-          />
+          <a href="#inicio">
+            <Image
+              src="/svg/brand.svg"
+              alt="Evoutech"
+              width={0}
+              height={0}
+              style={{ height: "auto", width: "200px" }}
+              unoptimized
+            />
+          </a>
           {/* Rotating Text */}
           <div className="absolute bottom-[-20px] left-0 w-full">
             <div className="marquee-container">
