@@ -3,6 +3,7 @@ import { TheHeader } from "@/components/layout/TheHeader";
 import { Applications } from "@/components/sections/Applications";
 import { ClientCarousel } from "@/components/sections/ClientCarousel";
 import { TheFooter } from "@/components/layout/TheFooter";
+import About from "@/components/sections/About";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <TheHeader />
       <Hero />
       <Applications />
+      <About />
       <ClientCarousel />
       <TheFooter />
     </div>

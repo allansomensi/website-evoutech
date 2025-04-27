@@ -3,17 +3,17 @@
 import Image from "next/image";
 
 const logos = [
-  { src: "/img/embale_bem.png", alt: "Embale Bem" },
-  { src: "/img/gulis.png", alt: "Gulis Sorvetes" },
-  { src: "/img/hangar7.png", alt: "Hangar7 Alfajores" },
-  { src: "/img/incoterm.png", alt: "Incoterm" },
-  { src: "/img/melos.png", alt: "Doces Melos" },
-  { src: "/img/nevadda.png", alt: "Nevadda Alfajores" },
-  { src: "/img/neveton.png", alt: "Doces Neveton" },
-  { src: "/img/rcm.png", alt: "RCM Acessórios de Metal" },
-  { src: "/img/santo_antonio.png", alt: "Santo Antônio Alimentos" },
-  { src: "/img/selecao.png", alt: "Doces Seleção" },
-  { src: "/img/xiski.png", alt: "Xiski Sorvetes" },
+  { src: "/img/brands/embale_bem.png", alt: "Embale Bem" },
+  { src: "/img/brands/gulis.png", alt: "Gulis Sorvetes" },
+  { src: "/img/brands/hangar7.png", alt: "Hangar7 Alfajores" },
+  { src: "/img/brands/incoterm.png", alt: "Incoterm" },
+  { src: "/img/brands/melos.png", alt: "Doces Melos" },
+  { src: "/img/brands/nevadda.png", alt: "Nevadda Alfajores" },
+  { src: "/img/brands/neveton.png", alt: "Doces Neveton" },
+  { src: "/img/brands/rcm.png", alt: "RCM Acessórios de Metal" },
+  { src: "/img/brands/santo_antonio.png", alt: "Santo Antônio Alimentos" },
+  { src: "/img/brands/selecao.png", alt: "Doces Seleção" },
+  { src: "/img/brands/xiski.png", alt: "Xiski Sorvetes" },
 ];
 
 const Logo = ({ src, alt }: { src: string; alt: string }) => (

@@ -24,7 +24,7 @@ export function TheFooter() {
               unoptimized
             />
           </div>
-          <p className="text-sm">Embalagem, Movimentação e Automação.</p>
+          <p className="text-sm">Embalamento, Movimentação e Automação.</p>
         </div>
 
         {/* Contato */}
