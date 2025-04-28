@@ -29,7 +29,7 @@ const Logo = ({ src, alt }: { src: string; alt: string }) => (
   </div>
 );
 
-export function ClientCarousel() {
+export default function ClientCarousel() {
   return (
     <section className="overflow-hidden bg-gray-50 py-6 backdrop-blur-lg">
       <div className="animate-marquee flex items-center justify-start space-x-12">

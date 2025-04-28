@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { Typewriter } from "../ui/Typewriter";
 
-export function Hero() {
+export default function Hero() {
   return (
     <section className="relative h-[90vh] w-full overflow-hidden">
       {/* Background Video */}

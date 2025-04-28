@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function TheFooter() {
+export default function TheFooter() {
   return (
     <footer className="bg-zinc-900 px-4 py-8 text-zinc-400">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 text-center md:grid-cols-3 md:text-left">

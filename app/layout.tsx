@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Loader from "@/components/ui/Loader";
 
 export const metadata: Metadata = {
   title: "Evoutech",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" className="scroll-smooth">
-      <body className={"antialiased"}>{children}</body>
+      <body className={"antialiased"}>
+        <Loader>{children}</Loader>
+      </body>
     </html>
   );
 }

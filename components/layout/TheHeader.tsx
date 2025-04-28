@@ -1,10 +1,11 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "../ui/Button";
 import { NavLink } from "../ui/NavLink";
 
-export function TheHeader() {
+export default function TheHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 

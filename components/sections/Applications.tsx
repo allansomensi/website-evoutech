@@ -24,7 +24,7 @@ const products = [
   },
 ];
 
-export function Applications() {
+export default function Applications() {
   return (
     <section id="aplicacoes" className="py-16">
       <div className="container mx-auto px-6 text-center">
