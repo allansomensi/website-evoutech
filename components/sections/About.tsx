@@ -46,6 +46,7 @@ export default function About() {
             src="/img/about.png"
             alt="Imagem da Empresa"
             fill
+            sizes="640px"
             className="rounded-xl object-cover"
             priority
           />

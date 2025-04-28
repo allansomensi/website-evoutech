@@ -5,6 +5,7 @@ import ClientCarousel from "@/components/sections/ClientCarousel";
 import TheFooter from "@/components/layout/TheFooter";
 import About from "@/components/sections/About";
 import CTABanner from "@/components/sections/CTABanner";
+import Machines from "@/components/sections/Machines";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <TheHeader />
       <Hero />
       <Applications />
+      <Machines />
       <About />
       <CTABanner />
       <ClientCarousel />
