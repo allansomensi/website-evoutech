@@ -31,7 +31,7 @@ const Logo = ({ src, alt }: { src: string; alt: string }) => (
 
 export default function ClientCarousel() {
   return (
-    <section className="overflow-hidden bg-gray-50 py-6 backdrop-blur-lg">
+    <section className="overflow-hidden py-6 backdrop-blur-lg">
       <div className="animate-marquee flex items-center justify-start space-x-12">
         {logos.concat(logos).map((logo, index) => (
           <Logo key={index} src={logo.src} alt={logo.alt} />

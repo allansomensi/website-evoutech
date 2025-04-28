@@ -6,6 +6,7 @@ import TheFooter from "@/components/layout/TheFooter";
 import About from "@/components/sections/About";
 import CTABanner from "@/components/sections/CTABanner";
 import Machines from "@/components/sections/Machines";
+import SpecialMachines from "@/components/sections/SpecialMachines";
 
 export default function Home() {
   return (
@@ -14,8 +15,9 @@ export default function Home() {
       <Hero />
       <Applications />
       <Machines />
-      <About />
       <CTABanner />
+      <SpecialMachines />
+      <About />
       <ClientCarousel />
       <TheFooter />
     </div>
