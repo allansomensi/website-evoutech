@@ -3,12 +3,14 @@ import Link from "next/link";
 interface NavLinkProps {
   href: string;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-export function NavLink({ href, children }: NavLinkProps) {
+export function NavLink({ href, children, onClick }: NavLinkProps) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className="group relative transition-colors select-none hover:text-blue-600"
     >
       {children}
