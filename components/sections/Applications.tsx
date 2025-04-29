@@ -28,7 +28,9 @@ export default function Applications() {
   return (
     <section id="aplicacoes" className="py-16">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="mb-12 text-4xl font-bold text-gray-800">Aplicações</h2>
+        <h2 className="mb-12 text-3xl font-extrabold text-gray-800 sm:text-4xl lg:text-5xl">
+          Aplicações
+        </h2>
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {products.map((product, index) => (

@@ -1,8 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Badge from "../ui/Badge";
+import MachineModal from "../ui/MachineModal";
+
+type Machine = {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  tags: string[];
+};
 
 const machines = [
   {
@@ -40,11 +49,21 @@ const machines = [
 ];
 
 export default function Machines() {
+  const [selectedMachine, setSelectedMachine] = useState<Machine | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (machine: Machine) => {
+    setSelectedMachine(machine);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedMachine(null), 300);
+  };
+
   return (
-    <div
-      id="maquinas"
-      className="bg-gradient-to-b from-gray-50 to-gray-100 px-4 py-16 sm:px-6 lg:px-8"
-    >
+    <div id="maquinas" className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl text-center">
         <h2 className="mb-12 text-3xl font-extrabold text-gray-900 sm:text-4xl lg:text-5xl">
           Nossas Máquinas
@@ -53,7 +72,8 @@ export default function Machines() {
           {machines.map((machine) => (
             <div
               key={machine.id}
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="group relative cursor-pointer overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              onClick={() => openModal(machine)}
             >
               <div className="relative">
                 <Image
@@ -99,6 +119,12 @@ export default function Machines() {
           ))}
         </div>
       </div>
+
+      <MachineModal
+        machine={selectedMachine}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   );
 }
