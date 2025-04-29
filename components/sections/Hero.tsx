@@ -30,7 +30,7 @@ export default function Hero() {
             ]}
           ></Typewriter>
         </h1>
-        <Button>Faça seu Orçamento</Button>
+        <Button href="#contato">Faça seu Orçamento</Button>
       </div>
     </section>
   );

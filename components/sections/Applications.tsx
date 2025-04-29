@@ -48,7 +48,7 @@ export default function Applications() {
               </h3>
               <p className="text-sm text-gray-600">{product.subtitle}</p>
               <div className="h-1 w-10 bg-blue-900"></div>
-              <Button>Saiba mais &raquo;</Button>
+              <Button href="#">Saiba mais &raquo;</Button>
             </div>
           ))}
         </div>

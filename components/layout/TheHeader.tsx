@@ -38,6 +38,7 @@ export default function TheHeader() {
               width={150}
               height={40}
               style={{ height: "auto", width: "clamp(120px, 15vw, 200px)" }}
+              priority
               unoptimized
             />
           </div>
@@ -83,7 +84,10 @@ export default function TheHeader() {
 
         {/* CTA Button */}
         <div className="hidden sm:block">
-          <Button className="text-sm whitespace-nowrap md:text-base">
+          <Button
+            href="#contato"
+            className="text-sm whitespace-nowrap md:text-base"
+          >
             Solicitar Orçamento
           </Button>
         </div>
@@ -112,7 +116,7 @@ export default function TheHeader() {
           mobileMenuOpen ? "max-h-64 py-4" : "max-h-0"
         }`}
       >
-        <nav className="flex flex-col space-y-4 font-medium text-gray-700">
+        <nav className="flex flex-col space-y-4 text-center font-medium text-gray-700">
           <NavLink href="#inicio" onClick={() => setMobileMenuOpen(false)}>
             Início
           </NavLink>
@@ -131,7 +135,9 @@ export default function TheHeader() {
 
           {/* CTA Button for mobile */}
           <div className="pt-2 md:hidden">
-            <Button className="w-full text-sm">Solicitar Orçamento</Button>
+            <Button href="#contato" className="w-full text-sm">
+              Solicitar Orçamento
+            </Button>
           </div>
         </nav>
       </div>

@@ -7,6 +7,7 @@ import About from "@/components/sections/About";
 import CTABanner from "@/components/sections/CTABanner";
 import Machines from "@/components/sections/Machines";
 import SpecialMachines from "@/components/sections/SpecialMachines";
+import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <CTABanner />
       <SpecialMachines />
       <About />
+      <Contact />
       <ClientCarousel />
       <TheFooter />
     </div>
