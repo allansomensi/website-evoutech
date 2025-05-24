@@ -1,15 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import React, { useEffect } from "react";
-import Badge from "../ui/Badge";
 
 interface Machine {
   id: number;
   name: string;
   description: string;
   image: string;
-  tags: string[];
 }
 
 interface MachineModalProps {
@@ -23,7 +19,6 @@ export default function MachineModal({
   isOpen,
   onClose,
 }: MachineModalProps) {
-  // Handle Escape key to close modal
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -91,28 +86,6 @@ export default function MachineModal({
             >
               {machine.name}
             </h3>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {machine.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  type={
-                    tag.toLowerCase() === "alimentício"
-                      ? "alimenticio"
-                      : tag.toLowerCase() === "peças metálicas"
-                        ? "pecas"
-                        : tag.toLowerCase() === "semi-automática"
-                          ? "semi-automatica"
-                          : tag.toLowerCase() === "automática"
-                            ? "automatica"
-                            : tag.toLowerCase() === "industrial"
-                              ? "industrial"
-                              : "default"
-                  }
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div>
             <p className="mt-4 leading-relaxed text-gray-600">
               {machine.description}
             </p>

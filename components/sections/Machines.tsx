@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import Badge from "../ui/Badge";
 import MachineModal from "../ui/MachineModal";
 
 type Machine = {
@@ -10,7 +9,6 @@ type Machine = {
   name: string;
   description: string;
   image: string;
-  tags: string[];
 };
 
 const machines = [
@@ -20,7 +18,6 @@ const machines = [
     description:
       "Ideal para produção de biscoitos amanteigados tipo colonial. Extrusão automática, corte programado e transporte dos biscoitos para as bandejas, garantindo agilidade e padronização.",
     image: "/img/machines/biscomak_p120.jpg",
-    tags: ["Automática", "Alimentício"],
   },
   {
     id: 2,
@@ -28,7 +25,6 @@ const machines = [
     description:
       "Equipamento de alta produção para massas e biscoitos por extrusão, com dois cilindros extrusores robustos. Largura útil de 300 a 1.500mm, ideal para fornos contínuos e produção em grande escala.",
     image: "/img/machines/biscomak_p200.jpg",
-    tags: ["Alimentício", "Industrial"],
   },
   {
     id: 3,
@@ -36,7 +32,6 @@ const machines = [
     description:
       "Máquina rotuladora semi-automática, ideal para aplicação de etiquetas e rótulos auto-adesivos, oferecendo uma solução econômica e versátil para aumentar a produtividade.",
     image: "/img/machines/rotuladora.jpg",
-    tags: ["Semi-Automática", "Industrial"],
   },
   {
     id: 4,
@@ -44,7 +39,6 @@ const machines = [
     description:
       "Datador eletrônico para máquinas com filme contínuo, projetado para altas taxas de produção (250 ciclos/min). Marca a cada meia ou uma volta, com dígitos em latão no sistema Flex Code.",
     image: "/img/machines/flex_cod.jpg",
-    tags: ["Automática", "Industrial"],
   },
 ];
 
@@ -84,28 +78,6 @@ export default function Machines() {
                   className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <div className="absolute top-3 right-3 flex flex-wrap gap-2">
-                  {machine.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      type={
-                        tag.toLowerCase() === "alimentício"
-                          ? "alimenticio"
-                          : tag.toLowerCase() === "peças metálicas"
-                            ? "pecas"
-                            : tag.toLowerCase() === "semi-automática"
-                              ? "semi-automatica"
-                              : tag.toLowerCase() === "automática"
-                                ? "automatica"
-                                : tag.toLowerCase() === "industrial"
-                                  ? "industrial"
-                                  : "default"
-                      }
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
               </div>
               <div className="p-5">
                 <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
