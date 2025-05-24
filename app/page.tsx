@@ -1,13 +1,13 @@
 import Hero from "@/components/sections/Hero";
 import TheHeader from "@/components/layout/TheHeader";
 import Applications from "@/components/sections/Applications";
-import ClientCarousel from "@/components/sections/ClientCarousel";
 import TheFooter from "@/components/layout/TheFooter";
 import About from "@/components/sections/About";
 import CTABanner from "@/components/sections/CTABanner";
 import Machines from "@/components/sections/Machines";
 import SpecialMachines from "@/components/sections/SpecialMachines";
 import Contact from "@/components/sections/Contact";
+import Clients from "@/components/sections/Clients";
 
 export default function Home() {
   return (
@@ -20,7 +20,7 @@ export default function Home() {
       <SpecialMachines />
       <About />
       <Contact />
-      <ClientCarousel />
+      <Clients />
       <TheFooter />
     </div>
   );
