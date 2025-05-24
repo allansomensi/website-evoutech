@@ -24,20 +24,20 @@ export default function TheHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full bg-white px-4 py-3 transition-all duration-300 sm:px-6 lg:px-8 ${
+      className={`sticky top-0 z-50 w-full bg-white px-4 py-6 transition-all duration-300 sm:px-6 lg:px-8 ${
         scrolled ? "shadow-md" : "shadow-sm"
       }`}
     >
       <div className="mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="flex flex-col items-center space-x-0 sm:flex-row sm:space-x-2">
+        <div className="flex flex-col items-center space-x-0 sm:flex-row sm:space-x-2 md:ml-14">
           <div className="flex items-center">
             <Image
               src="/svg/animated_logo.svg"
               alt="Animated Logo"
               width={150}
               height={40}
-              style={{ height: "auto", width: "clamp(120px, 15vw, 200px)" }}
+              style={{ height: "auto", width: "clamp(120px, 15vw, 300px)" }}
               priority
               unoptimized
             />
@@ -50,7 +50,7 @@ export default function TheHeader() {
                 alt="Evoutech"
                 width={150}
                 height={40}
-                style={{ height: "auto", width: "clamp(120px, 15vw, 200px)" }}
+                style={{ height: "auto", width: "clamp(120px, 15vw, 300px)" }}
                 unoptimized
               />
             </a>
@@ -86,7 +86,7 @@ export default function TheHeader() {
         <div className="hidden sm:block">
           <Button
             href="#contato"
-            className="text-sm whitespace-nowrap md:text-base"
+            className="mr-6 text-sm whitespace-nowrap md:text-base"
           >
             Solicitar Orçamento
           </Button>
@@ -156,7 +156,7 @@ export default function TheHeader() {
 
         .marquee-content span {
           padding-right: 30px;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: bold;
           color: #333;
         }
