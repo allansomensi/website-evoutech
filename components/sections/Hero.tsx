@@ -22,7 +22,7 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white sm:px-6 lg:px-8">
-        <h1 className="faixa-container relative mb-6 w-full max-w-7xl overflow-hidden text-5xl font-bold md:text-7xl">
+        <h1 className="relative mb-6 w-full max-w-7xl overflow-hidden py-10 text-5xl leading-24 font-bold md:text-7xl">
           <span
             className="inline-block whitespace-nowrap text-shadow-2xs"
             style={{
@@ -51,23 +51,6 @@ export default function Hero() {
           100% {
             transform: translateX(-33.33%);
           }
-        }
-
-        .faixa-container::before {
-          content: "";
-          position: absolute;
-          top: -20px;
-          left: -20px;
-          right: -20px;
-          bottom: -20px;
-          background: rgba(0, 0, 0, 0.4);
-          z-index: -1;
-          border-radius: 12px;
-        }
-
-        .faixa-container {
-          line-height: 1.3;
-          padding: 10px 0;
         }
       `}</style>
     </section>
