@@ -1,5 +1,298 @@
 @import "tailwindcss";
 
-html {
-  scroll-padding-top: 100px;
+@theme {
+  --color-ink: #0b0f14;
+  --color-ink-2: #121821;
+  --color-ink-3: #1b232e;
+  --color-paper: #f3f2ee;
+  --color-paper-2: #e8e6e0;
+  --color-line: #d9d6ce;
+  --color-accent: #2357e6;
+  --color-accent-hi: #6b93ff;
+  --color-accent-lo: #1a44bb;
+  --color-wheat: #d8a15a;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --ease-machine: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-feature-settings: "ss01";
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-hi);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-sans);
+  font-stretch: 82%;
+  letter-spacing: -0.02em;
+}
+
+/* Fundo técnico do hero: grade fina como papel milimetrado */
+@utility bg-blueprint {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
+}
+
+/* ---------- Logo animado (components/brand/MachineLogo.tsx) ---------- */
+
+.ml {
+  --ml-t: 1.8s;
+  overflow: visible;
+}
+
+.ml-move {
+  animation: ml-move var(--ml-t) linear infinite;
+}
+
+.ml-jaw {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ml-jaw var(--ml-t) linear infinite;
+}
+
+.ml-roller {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ml-spin var(--ml-t) linear infinite;
+  fill: none;
+  stroke: rgb(255 255 255 / 0.45);
+  stroke-width: 1.5;
+}
+
+.ml-reel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ml-unwind var(--ml-t) linear infinite;
+}
+
+.ml-seal {
+  stroke: #fff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: ml-seal var(--ml-t) ease-out infinite;
+}
+
+.ml[data-paused] *,
+.ml[data-paused] {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml * {
+    animation: none !important;
+  }
+}
+
+.ml-logo {
+  fill: #fff;
+}
+.ml-frame {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.16);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ml-belt {
+  fill: rgb(255 255 255 / 0.04);
+  stroke: rgb(255 255 255 / 0.3);
+  stroke-width: 1.5;
+}
+.ml-tick {
+  stroke: rgb(255 255 255 / 0.16);
+  stroke-width: 1.5;
+}
+.ml-product {
+  fill: var(--color-wheat);
+}
+.ml-product-dot {
+  fill: #a8742f;
+}
+.ml-film {
+  fill: var(--color-accent);
+  fill-opacity: 0.6;
+}
+.ml-film-shine,
+.ml-crimp-line {
+  stroke: rgb(255 255 255 / 0.4);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  fill: none;
+}
+.ml-crimp {
+  fill: var(--color-accent-hi);
+  fill-opacity: 0.75;
+}
+.ml-label {
+  fill: #fff;
+  fill-opacity: 0.9;
+}
+.ml-web {
+  fill: none;
+  stroke: var(--color-accent-hi);
+  stroke-opacity: 0.6;
+  stroke-width: 1.5;
+}
+.ml-reel-roll {
+  fill: var(--color-accent);
+  fill-opacity: 0.35;
+  stroke: var(--color-accent-hi);
+  stroke-opacity: 0.7;
+  stroke-width: 1.5;
+}
+.ml-reel-core {
+  fill: var(--color-ink);
+  stroke: rgb(255 255 255 / 0.5);
+  stroke-width: 1.5;
+}
+.ml-reel-spoke {
+  stroke: rgb(255 255 255 / 0.5);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.ml-callout {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  fill: rgb(255 255 255 / 0.5);
+}
+.ml-callout-n {
+  fill: var(--color-accent-hi);
+}
+.ml-leader {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.25);
+  stroke-width: 1;
+}
+
+@media (max-width: 639px) {
+  .ml-callout {
+    display: none;
+  }
+}
+
+@keyframes ml-move {
+  to {
+    transform: translateX(96px);
+  }
+}
+
+/* As lâminas passam pela posição mais baixa em 45.6° e 225.6° */
+@keyframes ml-jaw {
+  from {
+    transform: rotate(45.6deg);
+  }
+  to {
+    transform: rotate(-134.4deg);
+  }
+}
+
+@keyframes ml-spin {
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes ml-unwind {
+  to {
+    transform: rotate(-240deg);
+  }
+}
+
+@keyframes ml-seal {
+  0% {
+    opacity: 0.95;
+  }
+  22%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Modal de máquina ---------- */
+
+dialog.machine-dialog {
+  opacity: 0;
+  translate: 0 16px;
+  transition:
+    opacity 0.25s ease,
+    translate 0.3s var(--ease-machine),
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+dialog.machine-dialog[open] {
+  opacity: 1;
+  translate: 0 0;
+}
+@starting-style {
+  dialog.machine-dialog[open] {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+dialog.machine-dialog::backdrop {
+  background: rgb(11 15 20 / 0);
+  transition:
+    background 0.3s ease,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+dialog.machine-dialog[open]::backdrop {
+  background: rgb(11 15 20 / 0.7);
+}
+@starting-style {
+  dialog.machine-dialog[open]::backdrop {
+    background: rgb(11 15 20 / 0);
+  }
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility bg-blueprint-ink {
+  background-image:
+    linear-gradient(to right, rgb(11 15 20 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(11 15 20 / 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: center;
 }

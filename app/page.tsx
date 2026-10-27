@@ -1,27 +1,29 @@
-import Hero from "@/components/sections/Hero";
 import TheHeader from "@/components/layout/TheHeader";
-import Applications from "@/components/sections/Applications";
 import TheFooter from "@/components/layout/TheFooter";
-import About from "@/components/sections/About";
-import CTABanner from "@/components/sections/CTABanner";
+import Hero from "@/components/sections/Hero";
+import Applications from "@/components/sections/Applications";
 import Machines from "@/components/sections/Machines";
-import SpecialMachines from "@/components/sections/SpecialMachines";
-import Contact from "@/components/sections/Contact";
+import CustomProjects from "@/components/sections/CustomProjects";
+import About from "@/components/sections/About";
 import Clients from "@/components/sections/Clients";
+import Contact from "@/components/sections/Contact";
+import WhatsAppFab from "@/components/ui/WhatsAppFab";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-100">
+    <>
       <TheHeader />
-      <Hero />
-      <Applications />
-      <Machines />
-      <CTABanner />
-      <SpecialMachines />
-      <About />
-      <Contact />
-      <Clients />
+      <main id="conteudo">
+        <Hero />
+        <Applications />
+        <Machines />
+        <CustomProjects />
+        <About />
+        <Clients />
+        <Contact />
+      </main>
       <TheFooter />
-    </div>
+      <WhatsAppFab />
+    </>
   );
 }

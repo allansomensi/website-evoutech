@@ -1,102 +1,87 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import { useRef, useState } from "react";
 import MachineModal from "../ui/MachineModal";
-
-type Machine = {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-};
-
-const machines = [
-  {
-    id: 1,
-    name: "BISCOMAK P120",
-    description:
-      "Ideal para produção de biscoitos amanteigados tipo colonial. Extrusão automática, corte programado e transporte dos biscoitos para as bandejas, garantindo agilidade e padronização.",
-    image: "/img/machines/biscomak_p120.jpg",
-  },
-  {
-    id: 2,
-    name: "BISCOMAK P200",
-    description:
-      "Equipamento de alta produção para massas e biscoitos por extrusão, com dois cilindros extrusores robustos. Largura útil de 300 a 1.500mm, ideal para fornos contínuos e produção em grande escala.",
-    image: "/img/machines/biscomak_p200.jpg",
-  },
-  {
-    id: 3,
-    name: "ROTULADORA",
-    description:
-      "Máquina rotuladora semi-automática, ideal para aplicação de etiquetas e rótulos auto-adesivos, oferecendo uma solução econômica e versátil para aumentar a produtividade.",
-    image: "/img/machines/rotuladora.jpg",
-  },
-  {
-    id: 4,
-    name: "FLEX COD",
-    description:
-      "Datador eletrônico para máquinas com filme contínuo, projetado para altas taxas de produção (250 ciclos/min). Marca a cada meia ou uma volta, com dígitos em latão no sistema Flex Code.",
-    image: "/img/machines/flex_cod.jpg",
-  },
-];
+import { SectionHeading } from "../ui/SectionHeading";
+import { Plus } from "../ui/Icons";
+import { machines, type Machine } from "@/lib/machines";
 
 export default function Machines() {
-  const [selectedMachine, setSelectedMachine] = useState<Machine | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selected, setSelected] = useState<Machine | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const openModal = (machine: Machine) => {
-    setSelectedMachine(machine);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedMachine(null), 300);
+  const open = (machine: Machine) => {
+    setSelected(machine);
+    dialogRef.current?.showModal();
   };
 
   return (
-    <div id="maquinas" className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl text-center">
-        <h2 className="mb-12 text-3xl font-extrabold text-gray-900 sm:text-4xl lg:text-5xl">
-          Nossas Máquinas
-        </h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {machines.map((machine) => (
-            <div
-              key={machine.id}
-              className="group relative cursor-pointer overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-              onClick={() => openModal(machine)}
+    <section
+      id="maquinas"
+      aria-labelledby="maquinas-title"
+      className="border-line border-t bg-white py-20 sm:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          index="02"
+          eyebrow="Máquinas"
+          id="maquinas-title"
+          title="Linha própria, projetada e fabricada aqui."
+        >
+          Equipamentos robustos, de manutenção simples, para quem precisa
+          produzir mais com padrão — sem depender de importação.
+        </SectionHeading>
+
+        <ul className="no-scrollbar -mx-4 mt-12 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-y-10 sm:overflow-visible sm:px-0 sm:pb-0 lg:mt-20 lg:grid-cols-4">
+          {machines.map((machine, i) => (
+            <li
+              key={machine.slug}
+              className="w-[80%] shrink-0 snap-start sm:w-auto"
             >
-              <div className="relative">
-                <Image
-                  src={machine.image}
-                  alt={machine.name}
-                  width={0}
-                  height={0}
-                  className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+              <button
+                type="button"
+                onClick={() => open(machine)}
+                aria-haspopup="dialog"
+                className="group block w-full cursor-pointer text-left"
+              >
+                <div className="relative aspect-[12/13] overflow-hidden rounded-2xl bg-[#e4e4e4]">
+                  <Image
+                    src={machine.image}
+                    alt={machine.name}
+                    fill
+                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 46vw, 92vw"
+                    className="object-cover transition-transform duration-700 ease-[var(--ease-machine)] group-hover:scale-[1.04]"
+                  />
+                  <span className="text-ink/70 absolute top-4 left-4 rounded-full bg-white/85 px-2.5 py-1 font-mono text-[11px] backdrop-blur">
+                    0{i + 1}
+                  </span>
+                  <span className="bg-ink group-hover:bg-accent absolute right-4 bottom-4 grid h-11 w-11 place-items-center rounded-full text-white transition-colors duration-200">
+                    <Plus className="h-5 w-5" />
+                  </span>
+                </div>
+                <p className="text-accent mt-5 font-mono text-[11px] tracking-[0.14em] uppercase">
+                  {machine.category}
+                </p>
+                <h3 className="font-display mt-1.5 text-2xl font-semibold">
                   {machine.name}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  {machine.description}
+                <p className="text-ink/60 mt-1.5 leading-relaxed">
+                  {machine.summary}
                 </p>
-              </div>
-            </div>
+                <span className="text-ink decoration-ink/20 group-hover:decoration-accent mt-3 inline-flex items-center gap-1 text-sm font-semibold underline underline-offset-4 transition-colors">
+                  Ver detalhes
+                </span>
+              </button>
+            </li>
           ))}
-        </div>
+        </ul>
+        <p className="text-ink/40 mt-4 font-mono text-[11px] tracking-[0.14em] uppercase sm:hidden">
+          Deslize para ver todas →
+        </p>
       </div>
 
-      <MachineModal
-        machine={selectedMachine}
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      />
-    </div>
+      <MachineModal ref={dialogRef} machine={selected} />
+    </section>
   );
 }

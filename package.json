@@ -12,7 +12,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && prettier --write ."
+    "lint": "eslint . && prettier --write ."
   },
   "dependencies": {
     "next": "16.0.10",

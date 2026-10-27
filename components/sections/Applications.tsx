@@ -1,58 +1,90 @@
-import Image from "next/image";
-import Link from "next/link";
+import ApplicationArt, { type ArtKind } from "../brand/ApplicationArt";
+import { SectionHeading } from "../ui/SectionHeading";
 
-const products = [
+const applications: { title: string; text: string; art: ArtKind }[] = [
   {
-    title: "Produção de Biscoitos",
-    image: "img/products/biscoitos.png",
-    link: "#",
+    title: "Biscoitos",
+    text: "Extrusão, corte e transporte de biscoitos amanteigados e coloniais.",
+    art: "biscoitos",
   },
   {
-    title: "Embaladora de Doces",
-    image: "img/products/doces.png",
-    link: "#",
+    title: "Doces",
+    text: "Embalagem de doces em barra e confeitos em filme contínuo.",
+    art: "doces",
   },
   {
-    title: "Produção de Massas",
-    image: "img/products/massas.png",
-    link: "#",
+    title: "Massas",
+    text: "Equipamentos para extrusão e produção de massas alimentícias.",
+    art: "massas",
   },
   {
-    title: "Embaladora de Peças",
-    image: "img/products/pecas.png",
-    link: "#",
+    title: "Peças",
+    text: "Embalagem de peças, componentes e pequenos itens metálicos.",
+    art: "pecas",
   },
 ];
 
+const sectors = ["Alimentos", "Bebidas", "Químicos", "Cerâmicas", "Utilidades"];
+
 export default function Applications() {
   return (
-    <section id="aplicacoes" className="py-16">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="mb-12 text-3xl font-extrabold text-gray-800 sm:text-4xl lg:text-5xl">
-          Aplicações
-        </h2>
+    <section
+      id="aplicacoes"
+      aria-labelledby="aplicacoes-title"
+      className="py-20 sm:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          index="01"
+          eyebrow="Aplicações"
+          id="aplicacoes-title"
+          title="Do biscoito à peça metálica."
+        >
+          Cada produto tem formato, textura e ritmo próprios. Nossas máquinas
+          são pensadas a partir deles — não o contrário.
+        </SectionHeading>
 
-        <div className="grid grid-cols-1 place-items-center gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product, index) => (
-            <Link
-              key={index}
-              href={product.link}
-              className="group relative h-40 w-40 overflow-hidden rounded-full bg-white shadow-md sm:h-44 sm:w-44 md:h-48 md:w-48"
+        <ul className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-4">
+          {applications.map((app, i) => (
+            <li
+              key={app.title}
+              className="group relative flex overflow-hidden rounded-2xl bg-white sm:flex-col"
             >
-              <Image
-                src={product.image}
-                alt={product.title}
-                fill
-                className="object-contain transition-transform duration-300"
-                unoptimized
-              />
-              <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <span className="px-2 text-center text-base font-semibold text-white sm:text-lg">
-                  {product.title}
+              <div className="bg-blueprint-ink bg-paper-2/60 relative aspect-square w-28 shrink-0 sm:aspect-[5/4] sm:w-auto">
+                <span className="text-ink/40 absolute top-3 left-3 z-10 font-mono text-xs sm:top-4 sm:left-4">
+                  0{i + 1}
                 </span>
+                <ApplicationArt
+                  kind={app.art}
+                  className="absolute inset-0 h-full w-full p-2 transition-transform duration-500 ease-[var(--ease-machine)] group-hover:scale-[1.04] sm:p-4"
+                />
               </div>
-            </Link>
+              <div className="self-center p-5 sm:self-auto sm:p-6">
+                <h3 className="font-display text-xl font-semibold sm:text-2xl">
+                  {app.title}
+                </h3>
+                <p className="text-ink/60 mt-1 text-[0.95rem] leading-relaxed sm:mt-2 sm:text-base">
+                  {app.text}
+                </p>
+              </div>
+            </li>
           ))}
+        </ul>
+
+        <div className="border-line mt-10 flex flex-col gap-4 border-t pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-ink/50 font-mono text-xs tracking-[0.14em] uppercase">
+            Setores atendidos
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            {sectors.map((sector) => (
+              <li
+                key={sector}
+                className="border-line text-ink/75 rounded-full border px-4 py-1.5 text-sm"
+              >
+                {sector}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

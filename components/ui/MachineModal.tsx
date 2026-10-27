@@ -1,97 +1,85 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import type { Ref } from "react";
+import { buttonClasses } from "./ButtonLink";
+import { Check, Close, WhatsApp } from "./Icons";
+import type { Machine } from "@/lib/machines";
+import { whatsappLink } from "@/lib/site";
 
-interface Machine {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-}
-
-interface MachineModalProps {
+type Props = {
   machine: Machine | null;
-  isOpen: boolean;
-  onClose: () => void;
-}
+  ref: Ref<HTMLDialogElement>;
+};
 
-export default function MachineModal({
-  machine,
-  isOpen,
-  onClose,
-}: MachineModalProps) {
-  useEffect(() => {
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [onClose]);
-
-  if (!isOpen || !machine) return null;
-
+export default function MachineModal({ machine, ref }: Props) {
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500/30 p-4 backdrop-blur-md transition-opacity duration-300"
-      onClick={onClose}
+    <dialog
+      ref={ref}
+      aria-labelledby="machine-title"
+      className="machine-dialog text-ink m-auto max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] max-w-4xl overflow-hidden rounded-3xl bg-white p-0 shadow-2xl"
+      onClick={(e) => {
+        // Clique fora do conteúdo (no backdrop) fecha o modal
+        if (e.target === e.currentTarget) e.currentTarget.close();
+      }}
     >
-      <div
-        className="relative max-h-[90vh] w-full max-w-3xl scale-100 transform overflow-y-auto rounded-2xl bg-white opacity-100 shadow-2xl transition-all duration-300"
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-      >
-        {/* Close Button */}
-        <button
-          className="absolute top-4 right-4 rounded-full bg-gray-100 p-2 text-gray-600 hover:cursor-pointer hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          onClick={onClose}
-          aria-label="Fechar modal"
-        >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-
-        {/* Modal Content */}
-        <div className="flex flex-col sm:flex-row">
-          {/* Image */}
-          <div className="sm:w-1/2">
+      {machine && (
+        <div className="grid max-h-[calc(100dvh-1.5rem)] overflow-y-auto overscroll-contain md:grid-cols-2">
+          <div className="relative aspect-[4/3] bg-[#e4e4e4] md:aspect-auto md:min-h-[520px]">
             <Image
               src={machine.image}
               alt={machine.name}
-              width={0}
-              height={0}
-              className="h-64 w-full object-cover sm:h-full sm:rounded-l-2xl"
-              sizes="(max-width: 640px) 100vw, 50vw"
+              fill
+              sizes="(min-width: 768px) 450px, 100vw"
+              className="object-cover"
             />
           </div>
-          {/* Details */}
-          <div className="p-6 sm:w-1/2">
+
+          <div className="flex flex-col p-6 sm:p-8 md:p-10">
+            <p className="text-accent font-mono text-[11px] tracking-[0.14em] uppercase">
+              {machine.category}
+            </p>
             <h3
-              id="modal-title"
-              className="text-2xl font-bold text-gray-900 sm:text-3xl"
+              id="machine-title"
+              className="font-display mt-2 text-4xl font-semibold"
             >
               {machine.name}
             </h3>
-            <p className="mt-4 leading-relaxed text-gray-600">
+            <p className="text-ink/65 mt-4 leading-relaxed">
               {machine.description}
             </p>
+
+            <ul className="divide-line border-line mt-6 divide-y border-y">
+              {machine.features.map((feature) => (
+                <li key={feature} className="flex items-center gap-3 py-3">
+                  <Check className="text-accent h-4 w-4 shrink-0" />
+                  <span className="text-[0.95rem]">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-auto pt-8">
+              <a
+                href={whatsappLink(
+                  `Olá, Evoutech! Gostaria de um orçamento da ${machine.name}.`,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonClasses("whatsapp", "w-full")}
+              >
+                <WhatsApp /> Pedir orçamento da {machine.name}
+              </a>
+            </div>
           </div>
+
+          <form method="dialog" className="absolute top-3 right-3">
+            <button
+              className="text-ink hover:bg-paper-2 grid h-11 w-11 cursor-pointer place-items-center rounded-full bg-white/90 shadow-sm backdrop-blur transition-colors"
+              aria-label="Fechar"
+            >
+              <Close />
+            </button>
+          </form>
         </div>
-      </div>
-    </div>
+      )}
+    </dialog>
   );
 }

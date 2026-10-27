@@ -1,55 +1,81 @@
 import Image from "next/image";
+import { SectionHeading } from "../ui/SectionHeading";
+import { FOUNDED, yearsInBusiness } from "@/lib/site";
+
+const timeline = [
+  {
+    year: String(FOUNDED),
+    text: "Começamos com a manutenção de máquinas no setor alimentício.",
+  },
+  {
+    year: "2001",
+    text: "Lançamos os primeiros equipamentos próprios, pensados para pequenos e médios produtores.",
+  },
+  {
+    year: "Hoje",
+    text: "Máquinas em operação em indústrias de alimentos, bebidas, químicos, cerâmicas e utilidades.",
+  },
+];
 
 export default function About() {
   return (
-    <section id="sobre" className="w-full bg-gray-900">
-      <div className="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-12 p-8 md:flex-row md:gap-16 md:p-16">
-        {/* Texto */}
-        <div className="w-full flex-1 text-center md:text-left">
-          <h2 className="mb-6 text-3xl font-bold text-white md:text-4xl">
-            A Empresa
-          </h2>
+    <section
+      id="empresa"
+      aria-labelledby="empresa-title"
+      className="py-20 sm:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          index="04"
+          eyebrow="A empresa"
+          id="empresa-title"
+          title={`${yearsInBusiness()} anos de chão de fábrica.`}
+        />
 
-          <p className="mb-4 text-base leading-relaxed text-gray-300">
-            Desde <span className="font-semibold">1996</span>, a{" "}
-            <span className="font-semibold">Evoutech</span> transforma desafios
-            em soluções. Começamos com manutenção de máquinas no setor
-            alimentício e, em <span className="font-semibold">2001</span>,
-            lançamos nossos próprios equipamentos, focados em pequenos e médios
-            produtores.
-          </p>
+        <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5 lg:col-start-4 lg:row-start-1">
+            <div className="text-ink/70 space-y-5 text-lg leading-relaxed">
+              <p>
+                A Evoutech nasceu consertando máquinas. Foi dentro das fábricas,
+                resolvendo parada de linha, que aprendemos o que um equipamento
+                precisa ter para trabalhar todo dia sem dar dor de cabeça.
+              </p>
+              <p>
+                Na Região dos Vinhedos, em Bento Gonçalves, transformamos essa
+                experiência em máquinas próprias — com inovação, qualidade e uma
+                parceria de verdade com quem produz.
+              </p>
+            </div>
 
-          <p className="mb-4 text-base leading-relaxed text-gray-300">
-            Localizada na{" "}
-            <span className="font-semibold">Região dos Vinhedos</span>, em{" "}
-            <span className="font-semibold">Bento Gonçalves</span>, entregamos
-            inovação, qualidade e parceria real para impulsionar fábricas em
-            todo o Brasil.
-          </p>
+            <ol className="border-line mt-10 border-t">
+              {timeline.map((item) => (
+                <li
+                  key={item.year}
+                  className="border-line grid grid-cols-[5.5rem_1fr] gap-4 border-b py-5"
+                >
+                  <span className="font-display text-accent text-2xl font-semibold">
+                    {item.year}
+                  </span>
+                  <p className="text-ink/70 leading-relaxed">{item.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
 
-          <p className="text-base leading-relaxed text-gray-300">
-            Atuamos nos setores de{" "}
-            <span className="font-semibold">alimentos</span>,{" "}
-            <span className="font-semibold">bebidas</span>,{" "}
-            <span className="font-semibold">químicos</span>,{" "}
-            <span className="font-semibold">cerâmicas</span> e{" "}
-            <span className="font-semibold">utilidades</span>. Nosso foco é
-            claro: <span className="font-bold">Embalamento</span>,{" "}
-            <span className="font-bold">Movimentação</span> e{" "}
-            <span className="font-bold">Automação</span>.
-          </p>
-        </div>
-
-        {/* Imagem */}
-        <div className="relative aspect-[4/3] w-full max-w-md flex-1 overflow-hidden rounded-xl shadow-2xl">
-          <Image
-            src="/img/about.png"
-            alt="Imagem da Empresa"
-            fill
-            sizes="640px"
-            className="rounded-xl object-cover"
-            priority
-          />
+          <div className="lg:col-span-4 lg:col-start-9 lg:row-start-1">
+            <div className="bg-paper-2 relative aspect-square overflow-hidden rounded-2xl">
+              <Image
+                src="/img/about.png"
+                alt="Fachada da Evoutech com o logotipo em metal"
+                fill
+                sizes="(min-width: 1024px) 400px, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <p className="text-ink/45 mt-4 font-mono text-[11px] tracking-[0.14em] uppercase">
+              Rua Lázaro Giordani, 69 · Bento Gonçalves, RS
+            </p>
+          </div>
         </div>
       </div>
     </section>

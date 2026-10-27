@@ -1,102 +1,108 @@
 import Image from "next/image";
+import QuoteForm from "../ui/QuoteForm";
+import { SectionHeading } from "../ui/SectionHeading";
+import { ArrowUpRight, Mail, Phone, Pin, WhatsApp } from "../ui/Icons";
+import { site, whatsappLink } from "@/lib/site";
 
-function ContactItem({
-  icon,
-  alt,
-  label,
-  link,
-  text,
-}: {
-  icon: string;
-  alt: string;
-  label: string;
-  link: string;
-  text: string;
-}) {
-  return (
-    <p className="flex items-center gap-3">
-      <Image src={icon} alt={alt} width={24} height={24} />
-      <span>
-        <strong>{label}:</strong>{" "}
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline"
-        >
-          {text}
-        </a>
-      </span>
-    </p>
-  );
-}
+const channels = [
+  {
+    icon: WhatsApp,
+    label: "WhatsApp",
+    value: site.phone,
+    href: whatsappLink(),
+    external: true,
+  },
+  {
+    icon: Phone,
+    label: "Telefone",
+    value: site.phone,
+    href: site.phoneHref,
+  },
+  {
+    icon: Mail,
+    label: "E-mail",
+    value: site.email,
+    href: `mailto:${site.email}`,
+  },
+  {
+    icon: Pin,
+    label: "Endereço",
+    value: `${site.address.street} — ${site.address.district}, ${site.address.city} (${site.address.state})`,
+    href: site.mapsUrl,
+    external: true,
+  },
+];
 
 export default function Contact() {
   return (
-    <section id="contato" className="mx-auto w-full max-w-7xl px-4 py-16">
-      <div className="flex flex-col items-center justify-center gap-12 rounded-3xl bg-white p-10 shadow-2xl transition-all duration-300 md:flex-row">
-        {/* QR Code */}
-        <div className="flex flex-col items-center justify-center">
-          <a
-            href="https://api.whatsapp.com/send?phone=55545491535354&text=Olá, Evoutech! Gostaria de fazer um orçamento..."
-            target="_blank"
-          >
-            <Image
-              src="/svg/qr_whatsapp.svg"
-              alt="QR Code WhatsApp"
-              width={280}
-              height={280}
-              className="rounded-2xl shadow-xl"
-            />
-          </a>
-        </div>
+    <section
+      id="contato"
+      aria-labelledby="contato-title"
+      className="border-line bg-paper-2/50 border-t py-20 sm:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          index="05"
+          eyebrow="Contato"
+          id="contato-title"
+          title="Vamos conversar sobre a sua produção."
+        >
+          Conte o que você produz e o volume que precisa atingir. Indicamos o
+          equipamento certo — ou desenvolvemos um.
+        </SectionHeading>
 
-        {/* Informações de contato */}
-        <div className="flex flex-1 flex-col items-center justify-center gap-8 text-center md:items-start md:text-left">
-          <h2 className="text-3xl font-extrabold text-gray-800 md:text-4xl">
-            Entre em Contato
-          </h2>
+        <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <ul className="divide-line border-line divide-y border-y">
+              {channels.map(({ icon: Icon, label, value, href, external }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    {...(external && {
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    })}
+                    className="group flex items-center gap-4 py-5"
+                  >
+                    <span className="text-ink group-hover:bg-accent grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white transition-colors group-hover:text-white">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="text-ink/45 block font-mono text-[11px] tracking-[0.14em] uppercase">
+                        {label}
+                      </span>
+                      <span className="text-ink mt-0.5 block font-medium break-words">
+                        {value}
+                      </span>
+                    </span>
+                    <ArrowUpRight className="text-ink/30 group-hover:text-accent h-4 w-4 shrink-0 transition-colors" />
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-          <div className="flex flex-col gap-4 text-gray-600">
-            <ContactItem
-              icon="/svg/icons/geolocation.svg"
-              alt="Geo Location Icon"
-              label="Endereço"
-              link="https://maps.app.goo.gl/oBhLGYvcVAbLxH3w8"
-              text="Rua Lázaro Giordani, 69 - Jardim Gloria, RS"
-            />
-            <ContactItem
-              icon="/svg/icons/mobile.svg"
-              alt="Mobile Icon"
-              label="Celular"
-              link="tel:+5554991535354"
-              text="(54) 99153-5354"
-            />
-            <ContactItem
-              icon="/svg/icons/mail.svg"
-              alt="Mail Icon"
-              label="Email"
-              link="mailto:contato@evoutech.com.br"
-              text="contato@evoutech.com.br"
-            />
+            <div className="mt-8 hidden items-center gap-5 rounded-2xl bg-white p-5 lg:flex">
+              <Image
+                src="/svg/qr_whatsapp.svg"
+                alt="QR Code para conversar com a Evoutech no WhatsApp"
+                width={104}
+                height={104}
+                unoptimized
+                className="h-26 w-26 shrink-0"
+              />
+              <p className="text-ink/60 text-sm leading-relaxed">
+                <span className="text-ink block font-semibold">
+                  Está no computador?
+                </span>
+                Aponte a câmera do celular para o código e fale direto com a
+                gente pelo WhatsApp.
+              </p>
+            </div>
           </div>
 
-          {/* Botão WhatsApp */}
-          <a
-            href="https://api.whatsapp.com/send?phone=55545491535354&text=Olá, Evoutech! Gostaria de fazer um orçamento..."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-green-500 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-green-600"
-          >
-            <Image
-              src="/svg/icons/whatsapp.svg"
-              alt="WhatsApp Icon"
-              width={24}
-              height={24}
-              className="invert"
-            />
-            Falar no WhatsApp
-          </a>
+          <div className="lg:col-span-7">
+            <QuoteForm />
+          </div>
         </div>
       </div>
     </section>
